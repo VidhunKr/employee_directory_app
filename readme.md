@@ -1,27 +1,26 @@
-# Employee Directory (REST + Mongoose + React)
+## Tech Stack
 
-A simple MEAN-stack employee directory built using:
+Frontend Framework: Next.js 14+
 
-- Backend: Node.js + Express + Mongoose (MongoDB)
-- Frontend: React + Tailwind CSS
-- Features: Add, list, filter employees
+Styling: Tailwind CSS
+
+GraphQL Client: Apollo Client
+
+GraphQL Server: Apollo Server 4 (Backend)
+
+Database (Backend): MongoDB (Native Driver)
 
 
+##  Features
+List all employees with name, position, department, and salary
 
-## Running Comments
+Clean, responsive UI using Tailwind CSS
 
-```bash
-cd backend
-npm install
-node seed.js     # Seed initial data
-npm Start # Start server on http://localhost:3000
+Apollo Client for GraphQL queries
 
-## Frontend
+TypeScript for type safety
 
-cd frontend
-npm install
-npm start  # Starts React app at http://localhost:3001
-```
+
 # Screenshot
 ![screenshot](./screenshot/Screenshot%20(12).png)
 ![screenshot](./screenshot/Screenshot%202025-08-08%20211626.png)
