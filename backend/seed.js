@@ -1,20 +1,18 @@
-import mongoose from 'mongoose';
-import { employeeModel } from './models/employeeModel.js';
+import { connectDB } from "./config/db.js";
+
+const employees = [
+  { name: 'Alice', position: 'Developer', department: 'IT', salary: 60000 },
+  { name: 'Bob', position: 'Manager', department: 'HR', salary: 75000 },
+  { name: 'Carol', position: 'Designer', department: 'Marketing', salary: 50000 },
+  { name: 'Dan', position: 'Tester', department: 'IT', salary: 45000 },
+  { name: 'Eve', position: 'Analyst', department: 'Finance', salary: 55000 },
+];
 
 const seed = async () => {
-  await mongoose.connect("mongodb+srv://Vidhun:VidhunKr@cluster0.4rthhgp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
-
-  await employeeModel.deleteMany({});
-  await employeeModel.insertMany([
-    { name: 'Alice', position: 'Developer', department: 'Engineering', salary: 60000 },
-    { name: 'Bob', position: 'Designer', department: 'UI/UX', salary: 50000 },
-    { name: 'Carol', position: 'Manager', department: 'HR', salary: 70000 },
-    { name: 'Dave', position: 'Tester', department: 'Engineering', salary: 55000 },
-    { name: 'Eve', position: 'Support', department: 'IT', salary: 45000 },
-  ]);
-
-  console.log('Seed data inserted');
-  mongoose.disconnect();
+  const db = await connectDB();
+  await db.collection('employees').deleteMany({});
+  await db.collection('employees').insertMany(employees);
+  console.log('Seeded DB');
 };
 
 seed();

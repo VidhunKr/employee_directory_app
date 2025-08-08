@@ -1,19 +1,22 @@
-import express from "express"
-import dotenv from "dotenv"
-import cors from "cors"
-import { ConnectDB } from "./config/db.js"
-import mainRouter from "./mainRouter.js"
+import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { typeDefs,resolvers } from './models/employeeModel.js';
+import cors from 'cors';
 
+const app = express();
 
-dotenv.config()
-ConnectDB()
+// Middleware
+app.use(cors());
+app.use(express.json()); // ✅ Handles JSON body
 
-const app=express()
-app.use(cors())
-app.use(express.json())
-app.use("/employees",mainRouter)
+// Apollo Server
+const server = new ApolloServer({ typeDefs, resolvers });
+await server.start();
 
-app.listen(process.env.PORT, ()=>{
-    console.log("DB connected");
-    
-})
+app.use('/graphql', expressMiddleware(server));
+
+// Start server
+app.listen(4000, () => {
+  console.log('Server ready at http://localhost:4000/graphql');
+});

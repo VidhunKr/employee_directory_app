@@ -1,11 +1,12 @@
-import mongoose from "mongoose";
 
-export const ConnectDB = async ()=>{
-    try{
-        await
-        mongoose.connect(process.env.connection_String)
-    }catch(err){
-        console.error(err.message)
-        process.exit(1)
-    }
+import { MongoClient } from "mongodb";
+
+const client = new MongoClient('mongodb+srv://Vidhun:VidhunKr@cluster0.4rthhgp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+let db;
+export async function connectDB() {
+  if (!db) {
+    await client.connect();
+    db = client.db('employeeDB');
+  }
+  return db;
 }
